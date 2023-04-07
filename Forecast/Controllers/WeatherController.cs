@@ -71,13 +71,14 @@ namespace Forecast.Controllers
                     {
                         ReferenceHandler = ReferenceHandler.Preserve
                     };
-                    // Return the matching weather data as JSON
+                    //Verilen zaman diliminde bulunan hava durumunu veritabanından döndür
                     return Json(matchingWeather, options);
                 }
                 else
                 {
-                    // No matching weather data found
-                    return NotFound();
+                    //Verilen zaman diliminde bir hava durumu bulunamazsa hata döndür
+                    return NotFound(new { status = false, message = "Verilen saat dilimine ait bir hava durumu bulunamadı" });
+
                 }
             }
 
@@ -146,6 +147,12 @@ namespace Forecast.Controllers
 
             //Veritabanına kaydet
             _context.SaveChanges();
+
+            if(matchingWeatherFromJson == null )
+            {
+                //API'de verilen zaman diliminde bir hava durumu bulunamazsa hata döndür
+                return NotFound(new { status = false, message = "Verilen saat dilimine ait bir hava durumu bulunamadı" });
+            }
 
             //Yukarıda çektiğimiz parametredeki zamanla eşleşen tek veriyi döndür
             return Ok(JsonSerializer.Serialize(matchingWeatherFromJson));
