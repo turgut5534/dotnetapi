@@ -30,7 +30,7 @@ namespace Forecast.Controllers
 
         [HttpGet]
         [Route("forecast")]
-        public async Task<IActionResult> GetTomSawyerMetadataAsync(float lat, float lon, double dis, long utc)
+        public async Task<IActionResult> GetTomSawyerMetadataAsync(string apiKey, float lat, float lon, double dis, long utc)
         {
 
             //Veritabanındaki tüm konumları al
@@ -83,7 +83,7 @@ namespace Forecast.Controllers
             }
 
             //Eğer veritabanında aynı veya yakın bir konum bulunamazsa buraya gir ve API'ye istek at
-            var response = await _httpClient.GetAsync($"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=7fe4a9309691729c4c877c5559f1bdde&units=metric");
+            var response = await _httpClient.GetAsync($"https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={apiKey}&units=metric");
 
             //API'ye istek atarken hata çıkarsa hatayı döndür
             if (!response.IsSuccessStatusCode)
