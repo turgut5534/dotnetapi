@@ -52,3 +52,6 @@ C:\Users\turgu\Desktop\Dotnet\Forecast\Forecast\bin\Debug\net6.0\System.CodeDom.
 C:\Users\turgu\Desktop\Dotnet\Forecast\Forecast\bin\Debug\net6.0\System.Text.Encodings.Web.dll
 C:\Users\turgu\Desktop\Dotnet\Forecast\Forecast\bin\Debug\net6.0\System.Text.Json.dll
 C:\Users\turgu\Desktop\Dotnet\Forecast\Forecast\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+C:\Users\turgu\Desktop\Dotnet\Forecast\Forecast\bin\Debug\net6.0\System.Net.Http.Formatting.dll
+C:\Users\turgu\Desktop\Dotnet\Forecast\Forecast\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\turgu\Desktop\Dotnet\Forecast\Forecast\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
