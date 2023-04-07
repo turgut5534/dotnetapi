@@ -63,6 +63,32 @@ namespace Forecast.Controllers
             if (closestLocation != null)
             {
 
+                //Şimdiki zamanı çek
+                DateTime currentUtcTime = DateTime.UtcNow;
+                string formattedTime = currentUtcTime.ToString("yyyy-MM-dd HH:mm:ss");
+
+                //Bulunan en yakın konuma ait tüm hava durumunu gez
+                foreach (var weather in closestLocation.Weathers.ToList())
+                {
+                    //Eğer içlerinde zamanı geçmiş olan hava durumu varsa sil
+                    if (DateTime.Parse(weather.dt_txt) < DateTime.Parse(formattedTime))
+                    {
+                        closestLocation.Weathers.Remove(weather);
+                    }
+                }
+
+                //Bulunan konumun tüm hava durumunu sayısını al
+                int count = closestLocation.Weathers.Count;
+
+                //Eğer hiç hava durumu kalmadıysa bu konumu tamamen sil
+                if (count == 0) {
+                    _context.WeatherLocations.Remove(closestLocation);
+                }
+
+                //Değişikşiği veritabanına yansıt
+                await _context.SaveChangesAsync();
+
+                //Parametredeki zamana uyan hava durumunu al
                 var matchingWeather = closestLocation.Weathers.FirstOrDefault(w => w.Dt == utc);
 
                 if (matchingWeather != null)
